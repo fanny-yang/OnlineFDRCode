@@ -19,8 +19,9 @@ def main():
     #########%%%%% SET PARAMETERS FOR RUNNING PLOTTING  ##################### 
 
     hyprange = [0]
-    plot_numrun = 1 # Plot how many of the trials that are run
-    whichrun = 1 # random really
+    plot_numrun = 1 # Plot how many of the trials that are run are plotted
+    whichrun = args.whichrun
+    
     if args.num_runs < whichrun:
         logging.info("Can't choose a run that was not conducted")
         sys.exit()
@@ -28,7 +29,7 @@ def main():
     if args.pi_max != 0:
         args.pi1c = 0
 
-    # Run single FDR and check over hypothesis
+    ########%%%%%%%%%%%%%%%%% RUN EXPERIMENT %%%%%%%%########################
     for FDR in FDRrange:
 
         # Prevent from running if data already exists
@@ -37,10 +38,12 @@ def main():
         else:
             mempar_control_this = mempar_control
 
+        # Preparing filenames
         filename_pre = 'TD_MG%.1f_Si%.1f_FDR%d_PEW%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_NR%d' % (args.mu_gap, 1, FDR, args.penw_style, args.penw_const, args.prw_style, args.prw_const, args.m_corr, args.pi1c, mempar_control_this, args.num_hyp, 1, args.pi_max, args.num_runs)
         if not os.path.exists('./dat'):
             os.makedirs('./dat')
 
+        # Run experiment if it hasn't been run yet
         all_filenames = [filename for filename in os.listdir('./dat') if filename.startswith(filename_pre)]
         if all_filenames == []:
             print("Running experiment for FDR procedure %s" % proc_list[FDR]) 
@@ -72,6 +75,7 @@ if __name__ == "__main__":
     parser.add_argument('--mod-choice', type=int, default = 1)
     parser.add_argument('--mempar-control', type=float)
     parser.add_argument('--randseed', type=int, default=1)
+    parser.add_argument('--whichrun', type=int, default=1)
     args = parser.parse_args()
     logging.info(args)
     main()

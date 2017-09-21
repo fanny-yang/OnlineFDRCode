@@ -2,7 +2,7 @@
 
 HowTo reproduce the plots in the paper (with the settings mentioned in the paper), plots are saved as .pdf files in the folder "plots", data in the folder "dat" saved as .dat files
 
-1. Plot of FDP and Power of LORD++, LORD and Bonferroni procedures to illustrate higher power for GAI++ compared to simple GAI procedures
+1. Plot of FDR and Power of LORD++, LORD and Bonferroni procedures to illustrate higher power for GAI++ compared to simple GAI procedures
 
 python run_and_plot_overpi.py
 
@@ -14,17 +14,19 @@ python run_and_plot_overpi.py --m-corr 0.95,1.0,1.05 --weights 1 --FDRrange 3
 
 Plots will be saved as FDRvsPIvsMC... and PowervsPIvsMC...
 
-3. Plot memFDR, memPower, wealth and alpha against time/hypothesis for memFDR++
+*** Note the following plots may look very different than the ones in the paper since all runs are randomly generated *****
+
+3. Plot memFDP, memPower, wealth and alpha against time/hypothesis for memFDR++
 
 python run_and_plot_overhyp.py --FDRrange 3,1
 
-Plots will be saved as memFDR0.99vsHP_Plot0..., memTDR0.99vsHP_Plot0..., WealthvsHP_Plot0..., alphavsHP_Plot0 etc. 
+Plots will be saved as memFDP0.99vsHP_Plot0..., memPower0.99vsHP_Plot0..., WealthvsHP_Plot0..., alphavsHP_Plot0 etc. 
 
-4. Alpha-death memFDR, power and wealth plots
+4. Plot wealth against time/hypothesis for abstinent memFDR++ and normal mem-FDR++
 
 python run_and_plot_overhyp.py --FDRrange 3,4 --plot-style 1 --pi-max 0.01 
 
-Plots will be saved as memFDR0.99vsHP_Plot1..., memTDR0.99vsHP_Plot1..., WealthvsHP_Plot1..., alphavsHP_Plot1 etc.
+Plots will be saved as memFDP0.99vsHP_Plot1..., memPower0.99vsHP_Plot1..., WealthvsHP_Plot1..., alphavsHP_Plot1 etc.
 
 --------------------------------------------------------
 
@@ -52,7 +54,9 @@ used only for ...._overpi.py:
 used only for ..._overhyp.py:
 --pi-max (float): fixed pi1 (set 0 if pi1c should be used)
 --pi1c (integer): Index of the choice of progression of pi1 (evenly spread over time) as in the corresponding line number in expsettings/PIC.dat. Arbitrary progressions can be added.
+--whichrun (integer between 1 and 10): Can choose which of the single runs to plot for piggybacking and alpha-death plots
 
+----------------------------------------------------------
 
 Relevant files used in run_and_plot_xxx:
 
@@ -61,7 +65,7 @@ rowexp_new_batch.py: Contains functions gauss_two_mix() and bernoulli_draws() wh
 plot_batch_results.py: Contains plot_results() to plot plot_style 
 
 Utilities: 
-Put them all in one settings file. 
+
 settings_util.py: 
 	generate_hyp: creates pi1 vector, draws multiple samples of hypothesis vectors and saves in a file 
 	get_hyp: Loads hypothesis vectors from file and outputs one

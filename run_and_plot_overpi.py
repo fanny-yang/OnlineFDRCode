@@ -24,6 +24,8 @@ def main():
     hyprange = [0]
     plot_numrun = 1 # Plot how many of the trials that are run
 
+    ########%%%%%%%%%%%%%%%%% RUN EXPERIMENT %%%%%%%%########################
+    
     for pi_max in pirange:
         if args.weights == 1:
             FDR = FDRrange[0]
@@ -42,7 +44,7 @@ def main():
                     print("Experiments are already run for correlation %.2f and pi %.1f" % (m_corr, pi_max))
 
         else:    
-            # Run single FDR and check over hypothesis
+            # Run single FDR 
             for FDR in FDRrange:
 
                 if 'mem' not in proc_list[FDR]: 
@@ -55,7 +57,7 @@ def main():
                 filename_pre = 'AD_MG%.1f_Si%.1f_FDR%d_PEW%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_NR%d' % (args.mu_gap, 1, FDR, args.penw_style, args.penw_const, args.prw_style, args.prw_const, m_corr, 0, mempar_control, args.num_hyp, 1, pi_max, args.num_runs)
                 all_filenames = [filename for filename in os.listdir('./dat') if filename.startswith(filename_pre)]
 
-                # Run if data doesn't exist yet
+                # Run experiment if data doesn't exist yet
                 if all_filenames == []:
                     print("Running experiment for FDR procedure %s and pi %.1f" % (proc_list[FDR], pi_max)) 
                     run_single(args.num_runs, args.num_hyp, 1, args.mu_gap, args.penw_style,  args.penw_const, args.prw_style,  args.prw_const, [m_corr], 0, pi_max, mempar_control, args.alpha0, args.mod_choice, FDR, sigma = 1, verbose = False)

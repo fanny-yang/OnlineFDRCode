@@ -5,7 +5,7 @@ from numpy.random import randn, rand
 np.set_printoptions(precision = 4)
 
 import os
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import time
 from datetime import datetime
 import sys
@@ -127,13 +127,15 @@ def plot_results(plot_style, plot_numrun, whichrun, FDRrange, pirange, mempar_pl
         else:
             leg_col = 2
 
-#        filename = 'FDRvsHP_Plot%d_MG%.1f_Si%.1f_PWE%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_HR%d_R%d' %  (plot_style, mu_gap, sigma, penw_style, penw_const, prw_style, prw_const, m_corr, pi1c, mempar, NUMHYP, NUMDRAWS, pi_max, hyplen, whichrun)
+        #### FDP vs HYP ###
+        #        filename = 'FDRvsHP_Plot%d_MG%.1f_Si%.1f_PWE%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_HR%d_R%d' %  (plot_style, mu_gap, sigma, penw_style, penw_const, prw_style, prw_const, m_corr, pi1c, mempar, NUMHYP, NUMDRAWS, pi_max, hyplen, whichrun)
 
-        plot_curves_mat(xs, FDR_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'FDR($J$)', 0, leg_col = leg_col) 
-        ##### memFDR vs. HYP ####
+#        plot_curves_mat(xs, FDR_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'FDR($J$)', 0, leg_col = leg_col) 
+
+        ##### memFDR (strictly memFDP) vs. HYP ####
         filename = 'memFDR%.2fvsHP_Plot%d_MG%.1f_Si%.1f_PWE%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_HR%d_R%d' %  (mempar_plot, plot_style,mu_gap, sigma, penw_style, penw_const, prw_style, prw_const, m_corr, pi1c, mempar, NUMHYP, NUMDRAWS, pi_max, hyplen, whichrun)
 
-        plot_curves_mat(xs, memFDR_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'mem-FDR($J$) with $\delta = $%.2f' % mempar_plot, 0, leg_col = leg_col) 
+        plot_curves_mat(xs, memFDR_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'mem-FDP($J$) with $\delta = $%.2f' % mempar_plot, 0, leg_col = leg_col) 
 
 
         #### Wealth vs. HYP ####
@@ -143,7 +145,7 @@ def plot_results(plot_style, plot_numrun, whichrun, FDRrange, pirange, mempar_pl
         #### Power vs. HYP ####
 #        filename = 'PowervsHP_Plot%d_MG%.1f_Si%.1f_PWE%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_HR%d_R%d' %  (plot_style, mu_gap, sigma, penw_style, penw_const, prw_style, prw_const, m_corr, pi1c, mempar, NUMHYP, NUMDRAWS, pi_max, hyplen, whichrun)
 
-        plot_curves_mat(xs, TDR_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'Power($J$)', 0, leg_col = leg_col) 
+#        plot_curves_mat(xs, TDR_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'Power($J$)', 0, leg_col = leg_col) 
 
         #### memTDR vs. HYP ####
         filename = 'memPower%.2fvsHP_Plot%d_MG%.1f_Si%.1f_PWE%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_HR%d_R%d' %  (mempar_plot, plot_style, mu_gap, sigma, penw_style, penw_const, prw_style, prw_const, m_corr, pi1c, mempar, NUMHYP, NUMDRAWS, pi_max, hyplen, whichrun)
@@ -153,7 +155,7 @@ def plot_results(plot_style, plot_numrun, whichrun, FDRrange, pirange, mempar_pl
         #### alpha vs. HYP ####
         filename = 'alphavsHP%.2fvsHP_Plot%d_MG%.1f_Si%.1f_PWE%d_PEWC%d_PRW%d_PRC%d_MC%.4f_PIC%d_MP%.2f_NH%d_ND%d_PM%.2f_HR%d_R%d' %  (mempar_plot, plot_style, mu_gap, sigma, penw_style, penw_const, prw_style, prw_const, m_corr, pi1c, mempar, NUMHYP, NUMDRAWS, pi_max, hyplen, whichrun)
 
-        plot_curves_mat(xs, alpha_mat, legends_list, plot_dirname, filename,  'Hypothesis index', 'alpha($J$)', 0, leg_col = leg_col) 
+        plot_curves_mat(xs, alpha_mat, legends_list, plot_dirname, filename,  'Hypothesis index', '$alpha(J)$', 0, leg_col = leg_col) 
 
 
     #%%%%%%%%%%%%%%%%%%%  PLOTS vs. pi1 (without weights) %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -249,7 +251,7 @@ def plot_results(plot_style, plot_numrun, whichrun, FDRrange, pirange, mempar_pl
         
     elif plot_style == 3:
         
-        FDR = 8         #just GAI++ with different weight coefficients
+        FDR = FDRrange[0]
         numMC = len(m_corr_range)
         mempar_r = mempar
        

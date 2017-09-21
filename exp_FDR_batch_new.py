@@ -3,7 +3,7 @@ import numpy as np
 np.set_printoptions(precision = 4)
 
 import os
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import scipy.optimize as optim
 from scipy.stats import norm
 from scipy.stats import bernoulli
