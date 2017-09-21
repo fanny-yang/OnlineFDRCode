@@ -71,6 +71,15 @@ settings_util.py:
 	get_hyp: Loads hypothesis vectors from file and outputs one
 	create_pen: Create vector with penalty weights according to some style penw_style (see options above)
 	create_pr: Create vector with prior weights according to some prw_style (see options above)
+toimport.py: 
+	compute_memFDR: Computes memFDR from given rejection and true hypothesis vector penalty vector and memory parameter
+	compute_memTDR: Computes memPower from given rejection and true hypothesis vector penalty vector and memory parameter
+	Other smaller functions
+plotting.py:
+	Functions to plot curves and error bar plots as well as to save the plot
+	
+----------------------------------
 
+If anything is still unclear or you experience issues, please contact fanny-yang (a) berkeley.edu
 
 
